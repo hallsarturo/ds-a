@@ -32,7 +32,7 @@ class BinarySearchTree {
         return data < currentNode.data;
     }
 
-    isBiggerThan(data, currentNode) {
+    isGreaterThan(data, currentNode) {
         return data > currentNode.data;
     }
 
@@ -131,7 +131,7 @@ class BinarySearchTree {
         if (this.isLessThan(data, currentNode)) {
             currentNode.left = this.#removeNode(data, currentNode.left);
             return currentNode;
-        } else if (this.isBiggerThan(data, currentNode)) {
+        } else if (this.isGreaterThan(data, currentNode)) {
             currentNode.right = this.#removeNode(data, currentNode.right);
             return currentNode;
         } else {
@@ -289,5 +289,8 @@ class AVLTree extends BinarySearchTree {
             return null;
         }
 
+        if (this.isLessThan(data, currentNode)) {
+            currentNode.left = this.#removeNode(data, currentNode.left);
+        } else if (this.isGreaterThan)
     }
 }
