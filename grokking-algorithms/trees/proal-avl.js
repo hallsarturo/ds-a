@@ -285,12 +285,47 @@ class AVLTree extends BinarySearchTree {
     }
 
     #removeNode(data, currentNode) {
+        // Case 0: No node
         if (!currentNode) {
             return null;
         }
 
         if (this.isLessThan(data, currentNode)) {
             currentNode.left = this.#removeNode(data, currentNode.left);
-        } else if (this.isGreaterThan)
+        } else if (this.isGreaterThan(data, currentNode)) {
+            currentNode.right = this.#removeNode(data, currentNode.right);
+        } else {
+            // Found Node
+            // Case 1: no children
+            if (!currentNode.left && !currentNode.right) {
+                return null;
+            }
+
+            // Case 2: One child
+            if (!currentNode.left) {
+                return currentNode.right;
+            }
+
+            if (!currentNode.right) {
+                return currentNode.left;
+            }
+
+            // Case 3: two children
+            const minNode = this.#findMinNode(currentNode.right);
+            currentNode.data = minNode.data;
+            currentNode.right = this.#removeNode(
+                minNode.data,
+                currentNode.right
+            );
+        }
+        currentNode.height = this.#updateNodeHeight(currentNode);
+        return this.#balance(currentNode);
+    }
+
+    #findMinNode(node) {
+        if (!node.left) {
+            return node;
+        }
+        return this.#findMinNode(node.left);
     }
 }
