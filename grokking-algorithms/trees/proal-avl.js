@@ -328,5 +328,21 @@ class AVLTree extends BinarySearchTree {
         }
         return this.#findMinNode(node.left);
     }
-}
 
+    // GPT
+    graphicPrint(node = this.#root, prefix = '', isLeft = true) {
+        if (node) {
+            this.graphicPrint(
+                node.right,
+                prefix + (isLeft ? '│   ' : '    '),
+                false
+            );
+            console.log(prefix + (isLeft ? '└── ' : '┌── ') + node.data);
+            this.graphicPrint(
+                node.left,
+                prefix + (isLeft ? '    ' : '│   '),
+                true
+            );
+        }
+    }
+}
