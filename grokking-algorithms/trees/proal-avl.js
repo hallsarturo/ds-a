@@ -189,7 +189,7 @@ class AVLTree extends BinarySearchTree {
             return new AVLNode(data);
         }
 
-        if (this.isLessThan(data, currentNode.data)) {
+        if (this.isLessThan(data, currentNode)) {
             currentNode.left = this.#insertNode(data, currentNode.left);
         } else {
             currentNode.right = this.#insertNode(data, currentNode.right);
@@ -329,3 +329,4 @@ class AVLTree extends BinarySearchTree {
         return this.#findMinNode(node.left);
     }
 }
+
