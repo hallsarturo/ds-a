@@ -2,14 +2,17 @@
 
 const createCounter = function (n) {
     let count = n;
-    return function counter() {
-        console.log(count);
-        count++;
+    let hasBeenCalled = false;
+    return function () {
+        if (hasBeenCalled) {
+            count++;
+        }
+        hasBeenCalled = true;
         return count;
     };
 };
 
 const counter = createCounter(5);
-counter()
-counter()
-counter()
+counter();
+counter();
+counter();
