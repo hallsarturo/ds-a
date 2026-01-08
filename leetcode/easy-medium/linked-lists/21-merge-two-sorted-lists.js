@@ -7,7 +7,7 @@
 import {
     LinkedList,
     LinkedListNode,
-} from '../../book-loiane/linked-list/singly-linked-list.js';
+} from '../../../book-loiane/linked-list/singly-linked-list.js';
 
 const list1 = new LinkedList();
 const list2 = new LinkedList();
@@ -57,3 +57,5 @@ const mergeTwoLists = function (list1, list2) {
         return newHead;
     }
 };
+
+mergeTwoLists(list1, list2);

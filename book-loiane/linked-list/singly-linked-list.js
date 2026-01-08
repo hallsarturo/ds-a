@@ -120,18 +120,18 @@ export class LinkedList {
         this.#size = 0;
     }
 
-    toString() {
-        let current = this.#head;
-        let objString = '';
-        while (current) {
-            objString += this.#elementToString(current.data);
-            current = current.next;
-            if (current) {
-                objString += ', ';
-            }
-        }
-        return objString;
-    }
+    // toString() {
+    //     let current = this.#head;
+    //     let objString = '';
+    //     while (current) {
+    //         objString += this.#elementToString(current.data);
+    //         current = current.next;
+    //         if (current) {
+    //             objString += ', ';
+    //         }
+    //     }
+    //     return objString;
+    // }
 
     forEach(callback) {
         let current = this.#head;
