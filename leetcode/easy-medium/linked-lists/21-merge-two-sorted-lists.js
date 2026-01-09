@@ -21,7 +21,7 @@ list2.append(3);
 list2.append(4);
 
 const mergeTwoLists = function (list1, list2) {
-    // traverse list1 and list2, and insert the values in order
+    // Check if anny list is empty, if so, return the one that is not or return an empty LinkedList
 
     if (!list1 && !list2) {
         return list1;
@@ -30,32 +30,28 @@ const mergeTwoLists = function (list1, list2) {
     } else if (list1 && !list2) {
         return list1;
     } else {
-        let currentA = list1;
-        let currentB = list2;
+        // if both aren't empty, traverse each list at the same time
+        let dummy = new ListNode(-1);
+        let tail = dummy;
+        dummy.next = tail;
 
-        let newHead = null;
-        let currentMain = null;
-        while (currentA.next !== null && currentB.next !== null) {
+        while (list1 !== null && list2 !== null) {
             // compare values between the same list index, order them
-            if (currentA.val <= currentB.val) {
-                if (!newHead) {
-                    newHead = currentA;
-                    newHead.next = currentB;
-                    currentMain = newHead.next;
-                } else {
-                    currentMain.next = currentA;
-                }
+            if (list1.val < list2.val || list1.val === list2.val) {
+                tail.next = list1;
+                tail = tail.next;
+                list1 = list1.next;
             } else {
-                if (!newHead) {
-                    newHead = currentB;
-                    newHead.next = currentA;
-                } else {
-                    currentMain.next = currentB;
-                }
+                tail.next = list2;
+                tail = tail.next;
+                list2 = list2.next;
             }
         }
-        return newHead;
+
+        tail.next = list1 !== null ? list1 : list2;
+        return dummy.next;
     }
 };
 
-mergeTwoLists(list1, list2);
+const merged = mergeTwoLists(list1, list2);
+merged.forEach((data) => console.log(data));

@@ -115,6 +115,10 @@ export class LinkedList {
         return this.#size;
     }
 
+    get head() {
+        return this.#head;
+    }
+
     clear() {
         this.#head = null;
         this.#size = 0;
