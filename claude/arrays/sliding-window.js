@@ -6,16 +6,21 @@ const arr = [2, 1, 5, 1, 3, 2];
 const k = 3;
 
 const slidingWindow = function (arr, k) {
-    let max = null;
-
-    for (let i = 0; i < arr.length - k; i++) {
-        let current = arr
-            .slice(i, i + k)
-            .reduce((acc, current) => (acc += current));
-        if (max < current) max = current;
+    // Calculate sum of first window
+    let windowSum = 0;
+    for (let i = 0; i < k; i++) {
+        windowSum += arr[i];
     }
 
-    return max;
+    let maxSum = windowSum;
+
+    // Slide the window
+    for (let i = k; i < arr.length; i++) {
+        windowSum = windowSum - arr[i - k] + arr[i]; // Remove left, add right
+        maxSum = Math.max(maxSum, windowSum);
+    }
+
+    return maxSum;
 };
 
 console.log(slidingWindow(arr, k));
