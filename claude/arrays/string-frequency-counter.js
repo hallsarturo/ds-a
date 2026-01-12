@@ -12,13 +12,10 @@ const string = 'hello';
 const frequencyCount = function (string) {
     const map = {};
 
-    for (let i = 0; i < string.length; i++) {
-        if (!Object.hasOwn(map, string[i])) {
-            map[string[i]] = 1;
-        } else {
-            map[string[i]]++;
-        }
+    for (let char of string) {
+        map[char] = (map[char] || 0) + 1;
     }
+
     return map;
 };
 
