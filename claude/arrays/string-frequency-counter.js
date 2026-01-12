@@ -19,7 +19,7 @@ const frequencyCount = function (string) {
             map[string[i]]++;
         }
     }
-    return JSON.stringify(map);
+    return map;
 };
 
 console.log(frequencyCount(string));
