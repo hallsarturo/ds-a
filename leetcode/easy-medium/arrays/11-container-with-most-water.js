@@ -8,6 +8,7 @@
 
 const height = [1, 8, 6, 2, 5, 4, 8, 3, 7];
 const height2 = [3, 2];
+const height3 = [1, 0, 0, 0, 0, 0, 0, 2, 2];
 
 const maxArea = function (height) {
     if (height.length === 2) {
@@ -17,10 +18,11 @@ const maxArea = function (height) {
     let maxArea = null;
     let leftIndex = 0;
     let rightIndex = height.length - 1;
-    
-    while (leftIndex !== rightIndex) {
+    let distance = rightIndex - leftIndex;
+
+    while (distance > 1) {
         let currentArea = null;
-        let distance = rightIndex - leftIndex;
+        distance = rightIndex - leftIndex;
 
         if (height[leftIndex] < height[rightIndex]) {
             // case left index value is less
@@ -43,4 +45,4 @@ const maxArea = function (height) {
     return maxArea;
 };
 
-console.log(maxArea(height));
+console.log(maxArea(height3));
