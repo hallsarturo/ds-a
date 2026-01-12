@@ -15,7 +15,7 @@ const functions = [(x) => x + 1, (x) => x * x, (x) => 2 * x];
 
 const compose = function (functions) {
     if (functions.lenght === 0) {
-        return x => x;
+        return (x) => x;
     }
 
     return function (x) {
@@ -25,4 +25,3 @@ const compose = function (functions) {
 
 const fn = compose(functions);
 console.log(fn(4));
-
