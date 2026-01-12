@@ -12,13 +12,18 @@
 const arr = [3, 2, 2, 3];
 const val = 3;
 
-function inPlaceModify(arr, val) {
-    let index = arr.indexOf(val);
-    while (index > -1) {
-        arr.splice(index, 1);
-        index = arr.indexOf(val);
+function removeElement(arr, val) {
+    let writeIndex = 0; // Where to place next good element
+
+    for (let readIndex = 0; readIndex < arr.length; readIndex++) {
+        if (arr[readIndex] !== val) {
+            arr[writeIndex] = arr[readIndex]; // Copy good element forward
+            writeIndex++;
+        }
+        // If it equals val, we skip it (don't increment writeIndex)
     }
+
+    return writeIndex; // New length
 }
 
-inPlaceModify(arr, val);
-console.log(arr);
+console.log(removeElement(arr, val));
