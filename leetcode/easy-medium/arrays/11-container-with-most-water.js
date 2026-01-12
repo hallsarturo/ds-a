@@ -17,10 +17,10 @@ const maxArea = function (height) {
     let maxArea = null;
     let leftIndex = 0;
     let rightIndex = height.length - 1;
-    let distance = rightIndex - leftIndex;
-
+    
     while (leftIndex !== rightIndex) {
         let currentArea = null;
+        let distance = rightIndex - leftIndex;
 
         if (height[leftIndex] < height[rightIndex]) {
             // case left index value is less
@@ -29,7 +29,7 @@ const maxArea = function (height) {
             leftIndex++;
         } else if (height[leftIndex] > height[rightIndex]) {
             // case right index value is less
-            currentArea = height[leftIndex] * distance;
+            currentArea = height[rightIndex] * distance;
             if (maxArea < currentArea) maxArea = currentArea;
             rightIndex--;
         } else {
