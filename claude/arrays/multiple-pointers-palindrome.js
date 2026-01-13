@@ -36,6 +36,9 @@ function isPalindrome(string) {
         }
     }
 
+    // regex cleaning:
+    // let cleaned = string.toLowerCase().replace(/[^a-z0-9]/g, '');
+
     let left = 0;
     let right = cleaned.length - 1;
 
