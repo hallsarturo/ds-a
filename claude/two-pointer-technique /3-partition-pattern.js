@@ -10,7 +10,30 @@
 // Requirement: Modify the array in-place.
 
 const arr = [0, 1, 0, 3, 12];
+const arr2 = [0, 0, 1]
 
 function partition(arr) {
-    
+    let writePointer = 0;
+
+
+    while (readPointer < arr.length) {
+        if (arr[readPointer] === 0) {
+            readPointer++;
+            if (arr[readPointer] !== 0) {
+                arr[writePointer] = arr[readPointer];
+                arr[readPointer] = 0;
+                readPointer++;
+                writePointer++;
+            }
+        } else {
+            arr[writePointer] = arr[readPointer];
+            arr[readPointer] = 0;
+            writePointer++;
+            readPointer++;
+        }
+    }
+
+    return arr;
 }
+
+console.log(partition(arr2));
