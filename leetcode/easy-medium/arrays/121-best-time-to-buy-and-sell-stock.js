@@ -4444,14 +4444,14 @@ const prices3 = [
 ];
 const maxProfit = function (prices) {
     let maxProfit = 0;
+    let minValue = prices[0];
 
-    for (let buy = 0; buy < prices.length - 1; buy++) {
-        for (let sell = buy + 1; sell < prices.length; sell++) {
-            if (maxProfit < prices[sell] - prices[buy]) {
-                maxProfit = prices[sell] - prices[buy];
-            }
-        }
+    for (let i = 0; i < prices.length - 1; i++) {
+        if (prices[i] < minValue) minValue = prices[i];
+        if (prices[i + 1] - minValue > maxProfit)
+            maxProfit = prices[i + 1] - minValue;
     }
+
     return maxProfit;
 };
 
