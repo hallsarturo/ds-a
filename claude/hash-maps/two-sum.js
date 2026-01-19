@@ -21,14 +21,17 @@ const nums3 = [3, 3];
 const t3 = 6;
 // Output: [0,1]
 
-const twoSum = function (nums, t) {
-    const map = new Map(nums.map((key, idx) => [key, idx]));
+const twoSum = function (nums, target) {
+    const map = new Map();
 
     for (let i = 0; i < nums.length; i++) {
-        let difference = t - nums[i];
-        if (map.has(difference) && map.get(difference) !== i) {
-            return [i, map.get(difference)];
+        const complement = target - nums[i];
+
+        if (map.has(complement)) {
+            return [map.get(complement), i];
         }
+
+        map.set(nums[i], i); // Add current number AFTER checking
     }
 };
 
