@@ -36,3 +36,15 @@ const twoSum = function (nums, target) {
 };
 
 console.log(twoSum(nums3, t3));
+
+
+const twoSum2 = function (nums, t) {
+    const map = new Map(nums.map((key, idx) => [key, idx]));
+
+    for (let i = 0; i < nums.length; i++) {
+        let difference = t - nums[i];
+        if (map.has(difference) && map.get(difference) !== i) {
+            return [i, map.get(difference)];
+        }
+    }
+};
