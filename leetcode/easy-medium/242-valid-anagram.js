@@ -21,4 +21,26 @@ const isAnagram = function (s, t) {
     return true;
 };
 
+const isAnagram2 = function (s, t) {
+    if (s.length !== t.length) {
+        return false;
+    }
+
+    let mapS = {};
+    for (const char of s) {
+        mapS[char] = (mapS[char] || 0) + 1;
+    }
+
+    for (const char of t) {
+        if (mapS[char] && mapS[char] !== 0) {
+            mapS[char] -= 1;
+        } else {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+
 console.log(isAnagram(s, t));
