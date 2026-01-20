@@ -18,10 +18,10 @@ const strs = ['eat', 'tea', 'tan', 'ate', 'nat', 'bat'];
 // Output: [["a"]]
 
 const groupAnagrams = function (strs) {
-    let map = new Map();
+    const map = new Map();
 
     strs.forEach((word) => {
-        let sorted = word.split('').sort().join('');
+        const sorted = word.split('').sort().join('');
         if (!map.has(sorted)) {
             map.set(sorted, [word]);
         } else {
