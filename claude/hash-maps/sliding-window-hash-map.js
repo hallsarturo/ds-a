@@ -1,6 +1,6 @@
 // Pattern 4: Sliding Window + Hash Map
 // Use when: You need to find substrings with specific character constraints
-// Example Problem: Longest Substring Without Repeating Characters (LeetCode #3)
+// Example Preoblem: Longest Substring Without Repeating Characters (LeetCode #3)
 
 // Input: s = "abcabcbb"
 // Output: 3 (substring "abc")
@@ -34,19 +34,27 @@ const k = 2;
 const lengthOfLongestSubstring = function (s, k) {
     let left = 0;
     let maxLength = 0;
+    let counter = 0;
     const map = new Map();
 
     for (let right = 0; right < s.length; right++) {
-        while (map.has(s[right] && map.get(s[right]) > k)) {
-            if (map.get(s[left] === 2)) {
-                map.set(s[left], 1);
+        while (counter > k) {
+            if (map.get(s[left]) > 1) {
+                map.set(s[left], map.get(s[left]) - 1);
+                left++;
+                counter--;
+            } else {
+                map.delete(s[left]);
+                left++;
+                counter--;
             }
-            left++;
         }
         if (map.has(s[right])) {
-            (map.set(s[right]), 2);
+            map.set(s[right], map.get(s[right]) + 1);
+            counter++;
         } else {
             map.set(s[right], 1);
+            counter++;
         }
         maxLength = Math.max(maxLength, right - left + 1);
     }
