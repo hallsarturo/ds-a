@@ -34,28 +34,19 @@ const k = 2;
 const lengthOfLongestSubstring = function (s, k) {
     let left = 0;
     let maxLength = 0;
-    let counter = 0;
     const map = new Map();
 
     for (let right = 0; right < s.length; right++) {
-        while (counter > k) {
-            if (map.get(s[left]) > 1) {
-                map.set(s[left], map.get(s[left]) - 1);
-                left++;
-                counter--;
-            } else {
+        map.set(s[right], (map.get(s[right]) || 0) + 1);
+
+        while (map.size > k) {
+            map.set(s[left], map.get(s[left]) - 1);
+            if (map.get(s[left]) === 0) {
                 map.delete(s[left]);
-                left++;
-                counter--;
             }
+            left++;
         }
-        if (map.has(s[right])) {
-            map.set(s[right], map.get(s[right]) + 1);
-            counter++;
-        } else {
-            map.set(s[right], 1);
-            counter++;
-        }
+
         maxLength = Math.max(maxLength, right - left + 1);
     }
 
