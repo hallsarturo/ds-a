@@ -10,18 +10,21 @@
 // Given an integer array nums, return true if any value appears at least twice in the array,
 // and return false if every element is distinct.
 
-const nums = [1, 2, 3, ];
+const nums = [1, 2, 3, 1];
 // Output: true
 
 const containsDuplicate = function (nums) {
-    const set = new Set(nums);
+    const set = new Set();
 
-    set.forEach((e) => {
-        const index = nums.indexOf(e);
-        nums.splice(index, 1);
+    nums.forEach((e) => {
+        if (set.has(e)) {
+            return true;
+        } else {
+            set.add(e);
+        }
     });
 
-    return nums.length === 0 ? false : true;
+    return false;
 };
 
 console.log(containsDuplicate(nums));
