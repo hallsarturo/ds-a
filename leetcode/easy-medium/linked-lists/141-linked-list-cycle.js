@@ -76,19 +76,19 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-list.insertNode(3);
+list.insertNode(1);
 list.insertNode(2);
-list.insertNode(0);
-list.insertNode(-4);
+list.insertNode(3);
+list.insertNode(4);
 // [3,2,0,-4]
 list.printList();
 
- list.setCycle(1);
+list.setCycle(1);
 // list.printList();
 
 const hasCycle = function (head) {
     let slow = head;
-    let fast = slow.next;
+    let fast = slow.next.next;
 
     while (fast !== null && fast.next !== null) {
         if (fast.next === null) return false;
