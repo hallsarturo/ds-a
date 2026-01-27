@@ -1,30 +1,15 @@
-// Given head, the head of a linked list, determine if the linked list has a cycle in it.
+// Finding the Middle of a Linked List**
+// Also uses fast & slow pointers, but differently!
+// **Problem:** Find the middle node of a linked list.
 
-// There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
-
-// Return true if there is a cycle in the linked list. Otherwise, return false.
-
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-
-/**
- * @param {ListNode} head
- * @return {boolean}
- */
-
-export class LinkedListNode {
+class LinkedListNode {
     constructor(data) {
         this.data = data;
         this.next = null;
     }
 }
 
-export class LinkedList {
+class LinkedList {
     head;
     #size = 0;
 
@@ -71,32 +56,27 @@ export class LinkedList {
             console.log(currentNode.data);
             currentNode = currentNode.next;
         }
-        console.log(`list size: ${this.#size}`);
+        // console.log(`list size: ${this.#size}`);
     }
 }
 
 const list = new LinkedList();
 list.insertNode(1);
 list.insertNode(2);
-// list.insertNode(3);
-// list.insertNode(4);
-// [3,2,0,-4]
+list.insertNode(3);
+list.insertNode(4);
+list.insertNode(5);
 list.printList();
 
-// list.setCycle(1);
-// list.printList();
-
-const hasCycle = function (head) {
+const findMiddleLinkedList = function (head) {
     let slow = head;
     let fast = head;
 
     while (fast !== null && fast.next !== null) {
         slow = slow.next;
         fast = fast.next.next;
-        if (fast === slow) return true;
-
     }
-    return false;
+    return slow;
 };
 
-console.log(hasCycle(list.head));
+console.log(findMiddleLinkedList(list.head));
