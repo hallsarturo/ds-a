@@ -38,13 +38,16 @@ class LinkedList {
     }
 }
 
-const list = new LinkedList();
+const list1 = new LinkedList();
+const list2 = new LinkedList();
 
-list.insert(1);
-list.insert(2);
-list.insert(3);
-list.insert(4);
-list.printList();
+list1.insert(1);
+list1.insert(2);
+list1.insert(4);
+//list.printList();
+list2.insert(1);
+list2.insert(3);
+list2.insert(4);
 
 // Iterative (dummy node)
 const mergeTwoLists = function (list1, list2) {
@@ -52,7 +55,7 @@ const mergeTwoLists = function (list1, list2) {
     let tail = dummy;
 
     while (list1 && list2) {
-        if (list1.val === list1.val || list1.val < list2.val) {
+        if (list1.val < list2.val) {
             tail.next = list1;
             list1 = list1.next;
         } else {
@@ -65,3 +68,5 @@ const mergeTwoLists = function (list1, list2) {
     tail.next = list1 !== null ? list1 : list2;
     return dummy.next;
 };
+
+console.log(mergeTwoLists(list1.head, list2.head));
