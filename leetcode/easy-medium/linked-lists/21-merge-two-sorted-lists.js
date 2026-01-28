@@ -35,7 +35,7 @@ const mergeTwoLists = function (list1, list2) {
         let tail = dummy;
         dummy.next = tail;
 
-        while (list1 !== null && list2 !== null) {
+        while (list1 && list2) {
             // compare values between the same list index, order them
             if (list1.val < list2.val || list1.val === list2.val) {
                 tail.next = list1;
