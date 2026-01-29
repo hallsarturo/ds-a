@@ -46,22 +46,46 @@ list.insert(1);
 list.insert(2);
 list.insert(3);
 list.insert(4);
+list.insert(5);
+list.insert(6);
+list.insert(7);
+list.insert(8);
+list.insert(9);
+list.insert(10);
 
 list.printList();
 
 function reorderList(head) {
-    let left = head;
-    let right = null;
-    // base case
-    if (!head.next) {
-        right = head;
-        left.next = right;
-        right.next = left.next;
+    // find middle
+    let prevToSlow = null;
+    let slow = head;
+    let fast = head;
 
-        left = left.next;
+    while (fast && fast.next) {
+        prevToSlow = slow;
+        slow = slow.next;
+        fast = fast.next.next;
     }
-    //recursion
-    reorderList(head.next);
+
+    if (prevToSlow) prevToSlow.next = null;
+
+    // reverse second half
+    let current = slow;
+    let prev = null;
+    let next = null;
+
+    while (current) {
+        next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
+    }
+
+    slow.next = prev
+    // merge two lists
+
+    
 }
 
 console.log(reorderList(list.head));
+list.printList();
