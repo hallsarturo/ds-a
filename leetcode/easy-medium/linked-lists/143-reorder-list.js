@@ -43,19 +43,22 @@ class LinkedList {
 
 const list = new LinkedList();
 list.insert(1);
-list.insert(2);
-list.insert(3);
-list.insert(4);
-list.insert(5);
-list.insert(6);
-list.insert(7);
-list.insert(8);
-list.insert(9);
-list.insert(10);
+// list.insert(2);
+// list.insert(3);
+// list.insert(4);
+// list.insert(5);
+// list.insert(6);
+// list.insert(7);
+// list.insert(8);
+// list.insert(9);
+// list.insert(10);
 
 list.printList();
+console.log('////////////\n\n');
 
 function reorderList(head) {
+    if (!head.next) return head;
+
     // find middle
     let prevToSlow = null;
     let slow = head;
@@ -81,11 +84,25 @@ function reorderList(head) {
         current = next;
     }
 
-    slow.next = prev
+    slow = prev;
+
     // merge two lists
 
-    
+    let dummy = new LinkedListNode(-1);
+    let tail = dummy;
+
+    while (head && slow) {
+        tail.next = head;
+        head = head.next;
+        tail = tail.next;
+
+        tail.next = slow;
+        slow = slow.next;
+        tail = tail.next;
+    }
+
+    head = dummy.next;
 }
 
-console.log(reorderList(list.head));
+reorderList(list.head);
 list.printList();
