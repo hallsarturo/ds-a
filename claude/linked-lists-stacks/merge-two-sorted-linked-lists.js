@@ -70,3 +70,22 @@ const mergeTwoLists = function (list1, list2) {
 };
 
 console.log(mergeTwoLists(list1.head, list2.head));
+
+// Recursive
+function merge(list1, list2) {
+    // Base cases: if one is empty, return the other
+
+    if (!list1) return list2;
+    if (!list2) return list1;
+
+    // Recursive case: pick smaller, recursivelly merge rest
+    if (list1.val < list2.val) {
+        list1.next = merge(list1.next, list2);
+        return list1;
+    } else {
+        list2.next = merge(list1, list2.next);
+        return list2;
+    }
+}
+
+console.log(recursiveMerge(list1.head, list2.head));
