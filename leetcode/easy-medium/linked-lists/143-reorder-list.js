@@ -25,19 +25,43 @@ class LinkedList {
     }
 
     #append(data, currentNode) {
-        while (currentNode) {
+        while (currentNode.next) {
             currentNode = currentNode.next;
         }
-        currentNode.next = new LinkedListNode(data);
+        let newNode = new LinkedListNode(data);
+        currentNode.next = newNode;
     }
 
     printList() {
         let currentNode = this.head;
-        while(currentNode) {
-            console.log(currentNode.data) 
-            currentNode
+        while (currentNode) {
+            console.log(currentNode.data);
+            currentNode = currentNode.next;
         }
     }
 }
 
-const reorderList = function (head) {};
+const list = new LinkedList();
+list.insert(1);
+list.insert(2);
+list.insert(3);
+list.insert(4);
+
+list.printList();
+
+function reorderList(head) {
+    let left = head;
+    let right = null;
+    // base case
+    if (!head.next) {
+        right = head;
+        left.next = right;
+        right.next = left.next;
+
+        left = left.next;
+    }
+    //recursion
+    reorderList(head.next);
+}
+
+console.log(reorderList(list.head));
