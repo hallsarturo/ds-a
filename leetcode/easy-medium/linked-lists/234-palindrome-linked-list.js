@@ -6,8 +6,8 @@
 // Output: false
 
 class LinkedListNode {
-    constructor(data) {
-        this.data = data;
+    constructor(val) {
+        this.val = val;
         this.next = null;
     }
 }
@@ -16,27 +16,27 @@ class LinkedList {
     head;
     size = 0;
 
-    insert(data) {
+    insert(val) {
         if (!this.head) {
-            this.head = new LinkedListNode(data);
+            this.head = new LinkedListNode(val);
         } else {
-            this.#append(data);
+            this.#append(val);
         }
     }
 
-    #append(data) {
+    #append(val) {
         let currentNode = this.head;
         while (currentNode.next) {
             currentNode = currentNode.next;
         }
-        const newNode = new LinkedListNode(data);
+        const newNode = new LinkedListNode(val);
         currentNode.next = newNode;
     }
 
     printList() {
         let currentNode = this.head;
         while (currentNode) {
-            console.log(currentNode.data);
+            console.log(currentNode.val);
             currentNode = currentNode.next;
         }
     }
@@ -52,11 +52,31 @@ const list2 = new LinkedList();
 list2.insert(1);
 list2.insert(2);
 
+const list3 = new LinkedList();
+list3.insert(1);
+list3.insert(1);
+list3.insert(2);
+list3.insert(1);
+// false
+
 const isPalindrome = function (head) {
     // create a new linkedList with a deep copy, then reverse it
-    const newHead = head;
+    function deepCopyLinkedList(head) {
+        if (!head) return null;
+        const newHead = new LinkedListNode(head.val);
+        let currentOriginal = head.next;
+        let currentCopy = newHead;
 
+        while (currentOriginal) {
+            currentCopy.next = new LinkedListNode(currentOriginal.val);
+            currentCopy = currentCopy.next;
+            currentOriginal = currentOriginal.next;
+        }
+        return newHead;
+    }
     function reverseList(headNode) {
+        const newHead = deepCopyLinkedList(head);
+
         let prev = null;
         let current = headNode;
         let next = null;
@@ -69,14 +89,16 @@ const isPalindrome = function (head) {
         }
         return prev;
     }
-
+    const newHead = deepCopyLinkedList(head);
     const reversedHead = reverseList(newHead);
 
     // iterate both lists and compare each node, if one false return false
     let currentOriginal = head;
     let currentReversed = reversedHead;
-    while (currentOriginal) {
-        if (currentOriginal.data !== currentReversed.data) return false;
+    while (currentOriginal && currentReversed) {
+        if (currentOriginal.val !== currentReversed.val) {
+            return false;
+        }
         currentOriginal = currentOriginal.next;
         currentReversed = currentReversed.next;
     }
@@ -84,17 +106,3 @@ const isPalindrome = function (head) {
 };
 
 console.log(isPalindrome(list1.head));
-
-function deepCopyLinkedList(head) {
-    if (!head) return null;
-    const newHead = new LinkedListNode(head.data);
-    let currentOriginal = head.next;
-    let currentCopy = newHead;
-
-    while (currentOriginal) {
-        currentCopy.next = new LinkedListNode(currentOriginal.data);
-        currentCopy = currentCopy.next;
-        currentOriginal = currentOriginal.next;
-    }
-    return newHead;
-}
