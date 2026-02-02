@@ -29,41 +29,38 @@ MyQueue.prototype.push = function (x) {
  * @return {number}
  */
 MyQueue.prototype.pop = function () {
-    if (this.empty()) return false;
-    for (let i = this.stackIn.length - 1; i > 0; i--) {
-        this.stackOut.push(this.stackIn[i]);
+    if (this.empty()) return null;
+    // Only transfer if stackOut is empty
+    if (this.stackOut.length === 0) {
+        while (this.stackIn.length > 0) {
+            this.stackOut.push(this.stackIn.pop());
+        }
     }
-    let deleted = this.stackOut.pop();
-    this.stackIn = [];
-
-    for (let i = this.stackOut.length - 1; i > 0; i--) {
-        this.stackIn.push(this.stackOut[i]);
-    }
-    return deleted;
+    return this.stackOut.pop();
 };
 
 /**
  * @return {number}
  */
 MyQueue.prototype.peek = function () {
-    return this.stackIn[0];
+    if (this.empty()) return null;
+    while (this.stackIn.length > 0) {
+        this.stackOut.push(this.stackIn.pop());
+    }
+    return this.stackOut[this.stackOut.length - 1];
 };
 
 /**
  * @return {boolean}
  */
 MyQueue.prototype.empty = function () {
-    return this.stackIn.length === 0;
-};
-MyQueue.prototype.amount = function () {
-    return this.stackIn.length;
+    return this.stackIn.length === 0 && this.stackOut.length === 0;
 };
 
 const obj = new MyQueue();
-obj.push(10);
+obj.push('init');
 obj.push(2);
 obj.push(3);
 obj.push(4);
 console.log(obj.empty());
 console.log(obj.pop());
-console.log(obj.amount());
