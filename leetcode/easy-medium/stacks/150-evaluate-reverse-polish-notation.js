@@ -40,6 +40,9 @@ const operands2 = [5, 13, 4];
 const evalRPN = function (tokens) {
     let operators = [];
     let operands = [];
+    let integerCount = 0;
+    let acc = 0;
+    let temp;
 
     // walk the array from right to left
     for (let i = tokens.length - 1; i >= 0; i--) {
@@ -48,10 +51,22 @@ const evalRPN = function (tokens) {
             operators.push(tokens[i]);
         } else if (isOperand(tokens[i])) {
             operands.push(Number(tokens[i]));
+            if (!isOperator(tokens[i - 1])) {
+                integerCount--;
+            }
+            integerCount++;
+            // if two consecutive integers are found, execute the first operation
+            if (integerCount === 2) {
+                temp = currentExpresion(
+                    operands.pop(),
+                    operands.pop(),
+                    operators.pop()
+                );
+            }
         }
     }
 
-    // if two consecutive integers are found, execute the first operation
+    return acc;
 
     // helpers
     function isOperator(x) {
@@ -62,7 +77,18 @@ const evalRPN = function (tokens) {
         return x >= 0 && x <= 9;
     }
 
-   
+    function currentExpresion(a, b, operator) {
+        switch (operator) {
+            case '+':
+                return a + b;
+            case '-':
+                return a - b;
+            case '/':
+                return Math.trunc(a / b);
+            case '*':
+                return a * b;
+        }
+    }
 };
 
 console.log(evalRPN(tokens));
