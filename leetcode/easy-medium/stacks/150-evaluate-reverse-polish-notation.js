@@ -42,26 +42,28 @@ const evalRPN = function (tokens) {
     let operands = [];
     let integerCount = 0;
     let acc = 0;
-    let temp;
+    let temp = null;
 
     // walk the array from right to left
     for (let i = tokens.length - 1; i >= 0; i--) {
         // push operations to an Operator Stack
         if (isOperator(tokens[i])) {
             operators.push(tokens[i]);
+            integerCount = 0;
         } else if (isOperand(tokens[i])) {
             operands.push(Number(tokens[i]));
-            if (!isOperator(tokens[i - 1])) {
-                integerCount--;
-            }
             integerCount++;
             // if two consecutive integers are found, execute the first operation
             if (integerCount === 2) {
-                temp = currentExpresion(
-                    operands.pop(),
-                    operands.pop(),
-                    operators.pop()
-                );
+                if (!temp) {
+                    temp = currentExpresion(
+                        operands.pop(),
+                        operands.pop(),
+                        operators.pop()
+                    );
+                } else {
+                    acc = currentExpresion(temp, )
+                }
             }
         }
     }
