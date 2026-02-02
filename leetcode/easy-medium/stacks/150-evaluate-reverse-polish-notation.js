@@ -14,27 +14,20 @@ const tokens = ['2', '1', '+', '3', '*'];
 // Output: 9
 // Explanation: ((2 + 1) * 3) = 9
 
+const operators = ['*', '+'];
+const operands = [3, 1, 2];
+
 // Example 2:
 const tokens2 = ['4', '13', '5', '/', '+'];
 // Output: 6
 // Explanation: (4 + (13 / 5)) = 6
 
+const operators2 = ['+', '/'];
+const operands2 = [5, 13, 4];
+
 // Example 3:
-const tokens3 = [
-    '10',
-    '6',
-    '9',
-    '3',
-    '+',
-    '-11',
-    '*',
-    '/',
-    '*',
-    '17',
-    '+',
-    '5',
-    '+',
-];
+//["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+
 // Output: 22
 // Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
 // = ((10 * (6 / (12 * -11))) + 17) + 5
@@ -45,5 +38,31 @@ const tokens3 = [
 // = 22
 
 const evalRPN = function (tokens) {
-    
+    let operators = [];
+    let operands = [];
+
+    // walk the array from right to left
+    for (let i = tokens.length - 1; i >= 0; i--) {
+        // push operations to an Operator Stack
+        if (isOperator(tokens[i])) {
+            operators.push(tokens[i]);
+        } else if (isOperand(tokens[i])) {
+            operands.push(Number(tokens[i]));
+        }
+    }
+
+    // if two consecutive integers are found, execute the first operation
+
+    // helpers
+    function isOperator(x) {
+        return x === '+' || x === '-' || x === '/' || x === '*';
+    }
+
+    function isOperand(x) {
+        return x >= 0 && x <= 9;
+    }
+
+   
 };
+
+console.log(evalRPN(tokens));
