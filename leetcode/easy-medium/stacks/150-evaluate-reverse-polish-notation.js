@@ -39,37 +39,33 @@ const operands2 = [5, 13, 4];
 
 const evalRPN = function (tokens) {
     let stack = [];
-    let acc = 0;
 
     for (const token of tokens) {
         if (!isNaN(token) && token !== '') {
             stack.push(Number(token));
         } else if (isOperator(token)) {
-            acc += currentExpression(stack.pop(), stack.pop(), token);
+            const result = currentExpression(stack.pop(), stack.pop(), token);
+            stack.push(result)
         }
     }
 
-    return acc;
+    return stack[0];
 
     // helpers
     function isOperator(x) {
         return x === '+' || x === '-' || x === '/' || x === '*';
     }
 
-    // function isOperand(x) {
-    //     return x >= 0 && x <= 9;
-    // }
-
     function currentExpression(a, b, operator) {
         switch (operator) {
             case '+':
-                return a + b;
+                return b + a;
             case '-':
-                return a - b;
+                return b - a;
             case '/':
-                return Math.trunc(a / b);
+                return Math.trunc(b / a);
             case '*':
-                return a * b;
+                return b * a;
         }
     }
 };
