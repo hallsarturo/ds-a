@@ -66,7 +66,14 @@ class BSTree {
         queue.addRear(this.#root);
 
         while (queue.size > 0) {
-            console.log(node)
+            const node = queue.removeFront();
+            console.log(node.val);
+            if (node.left) {
+                queue.addRear(node.left);
+            }
+            if (node.right) {
+                queue.addRear(node.right);
+            }
         }
     }
 }
