@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { Deque } from '../../book/queue/deque-class.js';
+import { Deque } from '../../book-loiane/queue/deque-class.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const limitedDir = path.join(__dirname, '../trees/pics');
