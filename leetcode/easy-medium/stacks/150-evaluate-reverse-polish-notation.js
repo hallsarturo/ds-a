@@ -38,33 +38,14 @@ const operands2 = [5, 13, 4];
 // = 22
 
 const evalRPN = function (tokens) {
-    let operators = [];
-    let operands = [];
-    let integerCount = 0;
+    let stack = [];
     let acc = 0;
-    let temp = null;
 
-    // walk the array from right to left
-    for (let i = tokens.length - 1; i >= 0; i--) {
-        // push operations to an Operator Stack
-        if (isOperator(tokens[i])) {
-            operators.push(tokens[i]);
-            integerCount = 0;
-        } else if (isOperand(tokens[i])) {
-            operands.push(Number(tokens[i]));
-            integerCount++;
-            // if two consecutive integers are found, execute the first operation
-            if (integerCount === 2) {
-                if (!temp) {
-                    temp = currentExpresion(
-                        operands.pop(),
-                        operands.pop(),
-                        operators.pop()
-                    );
-                } else {
-                    acc = currentExpresion(temp, )
-                }
-            }
+    for (const token of tokens) {
+        if (!isNaN(token) && token !== '') {
+            stack.push(Number(token));
+        } else if (isOperator(token)) {
+            acc += currentExpression(stack.pop(), stack.pop(), token);
         }
     }
 
@@ -75,11 +56,11 @@ const evalRPN = function (tokens) {
         return x === '+' || x === '-' || x === '/' || x === '*';
     }
 
-    function isOperand(x) {
-        return x >= 0 && x <= 9;
-    }
+    // function isOperand(x) {
+    //     return x >= 0 && x <= 9;
+    // }
 
-    function currentExpresion(a, b, operator) {
+    function currentExpression(a, b, operator) {
         switch (operator) {
             case '+':
                 return a + b;
