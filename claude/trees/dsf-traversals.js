@@ -11,9 +11,7 @@ function inorderTraversal(root) {
     recursiveTraverse(root);
 
     function recursiveTraverse(currentNode) {
-        if (!currentNode) {
-            return result;
-        } else {
+        if (currentNode) {
             recursiveTraverse(currentNode.left);
             result.push(currentNode.val);
             recursiveTraverse(currentNode.right);
