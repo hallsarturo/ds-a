@@ -20,3 +20,30 @@ function inorderTraversal(root) {
 
     return result;
 }
+
+function preorderTraversal(root) {
+    const result = [];
+    recursion(root);
+
+    function recursion(currentNode) {
+        if (currentNode) {
+            result.push(currentNode.val);
+            recursion(currentNode.left);
+            recursion(currentNode.right);
+        }
+    }
+    return result;
+}
+function postorderTraversal(root) {
+    const result = [];
+    recursion(root);
+
+    function recursion(currentNode) {
+        if (currentNode) {
+            recursion(currentNode.left);
+            recursion(currentNode.right);
+            result.push(currentNode.val);
+        }
+    }
+    return result;
+}
