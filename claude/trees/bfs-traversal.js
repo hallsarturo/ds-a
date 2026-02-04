@@ -61,7 +61,7 @@ class BSTree {
         }
     }
 
-    bfTraversal(node) {
+    bfTraversal() {
         const queue = new Deque();
         queue.addRear(this.#root);
 
@@ -86,4 +86,5 @@ tree.insert(1);
 tree.insert(3);
 tree.insert(5);
 tree.insert(7);
-tree.printTree();
+// tree.printTree();
+tree.bfTraversal();
