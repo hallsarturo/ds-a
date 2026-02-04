@@ -74,3 +74,15 @@ const maxDepth = function (root) {
 
 console.log('Tree 1 depth:', maxDepth(tree1)); // Should be 3
 console.log('Tree 2 depth:', maxDepth(tree2)); // Should be 2
+
+
+// or: Alternative (building depth up):
+
+function maxDepth(node) {
+    if (!node) return 0;
+    
+    const leftDepth = maxDepth(node.left);
+    const rightDepth = maxDepth(node.right);
+    
+    return 1 + Math.max(leftDepth, rightDepth);
+}
