@@ -38,3 +38,4 @@ export default function buildTree(arr) {
 // Build your test trees
 export const tree1 = buildTree([3, 9, 20, null, null, 15, 7]);
 export const tree2 = buildTree([1, null, 2]);
+export const tree3 = buildTree([1, 2, 3, 4, 5]);
