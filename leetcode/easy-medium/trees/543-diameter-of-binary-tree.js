@@ -13,10 +13,7 @@ const diameterOfBinaryTree = function (root) {
         const leftHeight = edgeHeight(node.left);
         const rightHeight = edgeHeight(node.right);
 
-        let temp = leftHeight + rightHeight;
-        if (temp > maxDiameter) {
-            maxDiameter = temp;
-        }
+        maxDiameter = Math.max(maxDiameter, leftHeight + rightHeight);
         return 1 + Math.max(leftHeight, rightHeight);
     }
     edgeHeight(root);
