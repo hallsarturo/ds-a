@@ -5,6 +5,7 @@
 import { tree1, tree2, tree3, tree4 } from './dummy-tree-class.js';
 
 const diameterOfBinaryTree = function (root) {
+    let maxDiameter = 0;
     function edgeHeight(node) {
         //if (!node || (!node.left && !node.right)) return 0;
         if (!node) return 0;
@@ -12,15 +13,16 @@ const diameterOfBinaryTree = function (root) {
         const leftHeight = edgeHeight(node.left);
         const rightHeight = edgeHeight(node.right);
 
+        let temp = leftHeight + rightHeight;
+        if (temp > maxDiameter) {
+            maxDiameter = temp;
+        }
         return 1 + Math.max(leftHeight, rightHeight);
     }
-
-    const leftSubTreeHeight = edgeHeight(root.left);
-    const rightSubTreeHeight = edgeHeight(root.right);
-
-    return leftSubTreeHeight + rightSubTreeHeight;
+    edgeHeight(root);
+    return maxDiameter;
 };
 
 console.log(diameterOfBinaryTree(tree4));
 // tree3 output: 3
-// tree4 output: 
+// tree4 output:
