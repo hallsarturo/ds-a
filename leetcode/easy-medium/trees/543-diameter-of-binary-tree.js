@@ -20,4 +20,4 @@ const diameterOfBinaryTree = function (root) {
     return leftSubTreeHeight + rightSubTreeHeight + 1;
 };
 
-console.log(diameterOfBinaryTree)
+console.log(diameterOfBinaryTree(tree3));
