@@ -3,22 +3,23 @@
 import { tree5, tree6 } from './dummy-tree-class.js';
 
 const isBalanced = function (root) {
-    let isBalanced = true;
     function nodeHeight(node) {
         if (!node) return 0;
 
         const leftHeight = nodeHeight(node.left);
-        const rightHeight = nodeHeight(node.right);
+        if (leftHeight === -1) return -1;
 
-        if (leftHeight - rightHeight > 1 || leftHeight - rightHeight < -1) {
-            isBalanced = false;
+        const rightHeight = nodeHeight(node.right);
+        if (rightHeight === -1) return -1;
+
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
         }
 
         return 1 + Math.max(leftHeight, rightHeight);
     }
 
-    nodeHeight(root);
-    return isBalanced;
+    return nodeHeight(root) === -1 ? false : true;
 };
 
 console.log(isBalanced(tree5));
