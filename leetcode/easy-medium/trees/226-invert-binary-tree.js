@@ -3,16 +3,10 @@
 import { tree1, tree2 } from './dummy-tree-class.js';
 
 const invertTree = function (root) {
-    function recursion(node) {
-        if (node) {
-            [node.left, node.right] = [node.right, node.left];
-            recursion(node.left);
-            recursion(node.right);
-            return node;
-        }
-        return null
-    }
-    return recursion(root);
+    if (!root) return (null[(root.left, root.right)] = [root.right, root.left]);
+    invertTree(root.left);
+    invertTree(root.right);
+    return root;
 };
 
 console.log('Tree 1:', invertTree(tree1));
