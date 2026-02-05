@@ -21,5 +21,5 @@ const diameterOfBinaryTree = function (root) {
 };
 
 console.log(diameterOfBinaryTree(tree4));
-// tree3 output: 3
-// tree4 output:
+// tree5 output: true
+// tree6 output: false

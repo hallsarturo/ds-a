@@ -71,3 +71,5 @@ export const tree4 = buildTree([
     null,
     -2,
 ]);
+export const tree5 = buildTree([3, 9, 20, null, null, 15, 7]);
+export const tree6 = buildTree([1, 2, 2, 3, 3, null, null, 4, 4]);
