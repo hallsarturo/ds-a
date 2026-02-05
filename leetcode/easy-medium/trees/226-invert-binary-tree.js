@@ -3,7 +3,9 @@
 import { tree1, tree2 } from './dummy-tree-class.js';
 
 const invertTree = function (root) {
-    if (!root) return (null[(root.left, root.right)] = [root.right, root.left]);
+    if (!root) return null;
+
+    [root.left, root.right] = [root.right, root.left];
     invertTree(root.left);
     invertTree(root.right);
     return root;
