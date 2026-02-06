@@ -6,13 +6,10 @@ import { tree1, tree7, tree8, tree9 } from './dummy-tree-class.js';
 const levelOrder = function (root) {
     if (!root) return [];
     const result = [];
-    result.push([root.val]);
 
     // simulate deque
     const deque = [];
-    if (root.left || root.right) {
-        deque.push(root);
-    }
+    deque.push(root);
 
     while (deque.length > 0) {
         const levelSize = deque.length;
