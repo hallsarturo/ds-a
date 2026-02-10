@@ -17,19 +17,15 @@ const lowestCommonAncestor = function (root, p, q) {
         ) {
             return current;
         } // case both nodes are in left subTree
-        else if (p.val <= current.val && q.val <= current.val) {
-            if (p === current || q === current) {
-                return current;
-            }
+        if (p.val < current.val && q.val < current.val) {
             return recursion(current.left, p, q);
         }
         // case both nodes are in right subtree
-        else if (p.val >= current.val && q.val >= current.val) {
-            if (p === current || q === current) {
-                return current;
-            }
+        if (p.val > current.val && q.val > current.val) {
             return recursion(current.right, p, q);
         }
+
+        return current;
     }
 };
 
