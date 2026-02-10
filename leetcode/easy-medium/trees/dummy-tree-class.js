@@ -82,3 +82,4 @@ export const tree12 = buildTree([5, 1, 4, null, null, 3, 6]);
 export const tree13 = buildTree([6, 1, 7, null, 4, 6, 9, 8, 5]);
 export const tree14 = buildTree([6, 1, 7, null, 4, null, 8, null, 5, null, 9]);
 export const tree15 = buildTree([2, 2, 2]);
+export const tree16 = buildTree([4, 2, 7, 1, 3]);
