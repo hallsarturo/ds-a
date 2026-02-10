@@ -5,31 +5,17 @@
 import { tree16 } from './dummy-tree-class.js';
 
 const insertIntoBST = function (root, val) {
-    recursion(root, val);
-    function recursion(current, val) {
-        if (!current) {
-            return (root = new TreeNode(val));
-        } else {
-            // val is less than current node
-            if (val < current.val) {
-                if (!current.left) {
-                    current.left = new TreeNode(val);
-                } else {
-                    recursion(current.left, val);
-                }
-            }
-            // val is greater than current Node
-            else {
-                if (!current.right) {
-                    current.right = new TreeNode(val);
-                } else {
-                    recursion(current.right, val);
-                }
-            }
-        }
+    if (!root) {
+        return root = new TreeNode(val);
     }
-
+    // Recursive case: go left or right
+    if (val < root.val) {
+        root.left = insertIntoBST(root.left, val);
+    } else {
+        root.right = insertIntoBST(root.right, val);
+    }
     return root;
 };
+    
 
 console.log(insertIntoBST(tree16, 5));
