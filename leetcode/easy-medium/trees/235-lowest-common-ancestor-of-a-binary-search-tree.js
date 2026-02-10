@@ -8,18 +8,23 @@ const lowestCommonAncestor = function (root, p, q) {
     return recursion(root, p, q);
 
     function recursion(current, p, q) {
+        if (!current) return null;
+
         // case p,q are different subtrees, current is LCA
-        if ((p < current && q > current) || (p > current && q < current)) {
+        if (
+            (p.val < current.val && q.val > current.val) ||
+            (p.val > current.val && q.val < current.val)
+        ) {
             return current;
         } // case both nodes are in left subTree
-        else if (p <= current && q <= current) {
+        else if (p.val <= current.val && q.val <= current.val) {
             if (p === current || q === current) {
                 return current;
             }
             return recursion(current.left, p, q);
         }
         // case both nodes are in right subtree
-        else if (p >= current && q >= current) {
+        else if (p.val >= current.val && q.val >= current.val) {
             if (p === current || q === current) {
                 return current;
             }
