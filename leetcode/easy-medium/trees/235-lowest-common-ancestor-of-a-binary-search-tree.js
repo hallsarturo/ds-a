@@ -9,17 +9,19 @@ const lowestCommonAncestor = function (root, p, q) {
 
     function recursion(current, p, q) {
         // case p,q are different subtrees, current is LCA
-        if ((p < current.val && q > current.val) || (p > current.val && q < current.val)) {
-            return current.val;
+        if ((p < current && q > current) || (p > current && q < current)) {
+            return current;
         } // case both nodes are in left subTree
-        else if (p < current.val && q < current.val) {
-            if (p === current.val || q === current.val) {
-                return current.val;
+        else if (p <= current && q <= current) {
+            if (p === current || q === current) {
+                return current;
             }
             return recursion(current.left, p, q);
-        } else if (p > current.val && q > current.val) {
-            if (p === current.val || q === current.val) {
-                return current.val;
+        }
+        // case both nodes are in right subtree
+        else if (p >= current && q >= current) {
+            if (p === current || q === current) {
+                return current;
             }
             return recursion(current.right, p, q);
         }
