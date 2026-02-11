@@ -7,18 +7,20 @@
 // return the maximum amount of money you can rob tonight without alerting the police.
 
 const rob = function (nums) {
-    let max = [];
-    max.push(nums[0]);
+    if (nums.length === 1) return nums[0];
 
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] + (max[i - 2] || 0) > max[i - 1]) {
-            max[i] = (max[i - 2] || 0) + nums[i];
-        } else {
-            max[i] = max[i - 1];
-        }
+    const dp = [];
+    dp[0] = nums[0];
+    dp[1] = Math.max(nums[0], nums[1]);
+
+    for (let i = 2; i < nums.length; i++) {
+        dp[i] = Math.max(
+            nums[i] + dp[i - 2], // Rob this house
+            dp[i - 1] // Skip this house
+        );
     }
 
-    return max[max.length - 1];
+    return dp[nums.length - 1];
 };
 
 console.log(rob([2, 1, 1, 2]));
