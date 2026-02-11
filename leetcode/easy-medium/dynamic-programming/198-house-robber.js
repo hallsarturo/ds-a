@@ -11,14 +11,14 @@ const rob = function (nums) {
     max.push(nums[0]);
 
     for (let i = 1; i < nums.length; i++) {
-        if ((nums[i] + (max[i - 2] || 0)) > max[i - 1]) {
+        if (nums[i] + (max[i - 2] || 0) > max[i - 1]) {
             max[i] = (max[i - 2] || 0) + nums[i];
         } else {
             max[i] = max[i - 1];
         }
     }
 
-    return Math.max(...max);
+    return max[max.length - 1];
 };
 
 console.log(rob([2, 1, 1, 2]));
