@@ -4,8 +4,7 @@ function dfsAll(graph) {
     for (let node in graph) {
         if (!visited.has(node)) {
             console.log(`New component starting at ${node}`);
-            dfs(graph, node, vis
-                ited);
+            dfs(graph, node, visited);
         }
     }
 }
