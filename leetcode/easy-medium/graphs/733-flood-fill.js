@@ -12,6 +12,7 @@ const floodFill = function (image, sr, sc, color) {
     const colorToChange = image[sr][sc];
 
     const fill = (r, c, newColor) => {
+        // Boundary
         if (r < 0 || r >= image.length || c < 0 || c >= image[0].length) {
             return;
         }
@@ -24,27 +25,13 @@ const floodFill = function (image, sr, sc, color) {
         // Paint
         image[r][c] = newColor;
 
-        // traverse current row
-        // left
-        for (let i = c - 1; i >= 0; i--) {
-            if (image[r][i] !== colorToChange) {
-                break;
-            } else {
-                image[r][i] = newColor;
-            }
-        }
-
-        // right
-        for (let i = c + 1; i < image[r].length; i++) {
-            if (image[r][i] !== colorToChange) {
-                break;
-            } else {
-                image[r][i] = newColor;
-            }
-        }
-
-        // recurse other rows
+        // traverse left
+        fill(r, c - 1, newColor);
+        // traverse right
+        fill(r, c + 1, newColor);
+        // traverse up
         fill(r - 1, c, newColor);
+        // traverse down
         fill(r + 1, c, newColor);
     };
 
