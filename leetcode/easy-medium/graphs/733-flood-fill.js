@@ -7,3 +7,77 @@
 // Keep repeating this process by checking neighboring pixels of the updated pixels and modifying their color if it matches the original color of the starting pixel.
 // The process stops when there are no more adjacent pixels of the original color to update.
 // Return the modified image after performing the flood fill.
+
+const floodFill = function (image, sr, sc, color) {
+    const colorToChange = image[sr][sc];
+
+    const fill = (r, c, newColor) => {
+        if (r < 0 || r >= image.length || c < 0 || c >= image[0].length) {
+            return;
+        }
+
+        // Check if current pixel matches original color
+        if (image[r][c] !== colorToChange) {
+            return;
+        }
+
+        // Paint
+        image[r][c] = newColor;
+
+        // traverse current row
+        // left
+        for (let i = c - 1; i >= 0; i--) {
+            if (image[r][i] !== colorToChange) {
+                break;
+            } else {
+                image[r][i] = newColor;
+            }
+        }
+
+        // right
+        for (let i = c + 1; i < image[r].length; i++) {
+            if (image[r][i] !== colorToChange) {
+                break;
+            } else {
+                image[r][i] = newColor;
+            }
+        }
+
+        // recurse other rows
+        fill(r - 1, c, newColor);
+        fill(r + 1, c, newColor);
+    };
+
+    if (colorToChange !== color) {
+        fill(sr, sc, color);
+    }
+
+    return image;
+};
+
+console.log(
+    floodFill(
+        [
+            [1, 1, 1],
+            [1, 1, 0],
+            [1, 0, 1],
+        ],
+        1,
+        1,
+        2
+    )
+);
+//Output: [[2,2,2],[2,2,0],[2,0,1]]
+console.log('\n');
+console.log(
+    floodFill(
+        [
+            [0, 0, 0],
+            [0, 0, 0],
+        ],
+        0,
+        0,
+        0
+    )
+);
+// Output: [[0,0,0],[0,0,0]]
