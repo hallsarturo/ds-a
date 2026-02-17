@@ -18,4 +18,10 @@ const grid2 = [
 ];
 // Output: 3;
 
-const numIslands = function (grid) {};
+const numIslands = function (grid) {
+    // Traverse the Grid in order
+    // Start a 4 axes DFS traversal, add it to the counter at the end
+    //    // add visited node position into a MAP
+    // Continue traverse, if not zero Start a new Traversal (if position has been visited skip)
+    // return counter
+};
