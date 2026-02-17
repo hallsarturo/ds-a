@@ -20,8 +20,42 @@ const grid2 = [
 
 const numIslands = function (grid) {
     // Traverse the Grid in order
-    // Start a 4 axes DFS traversal, add it to the counter at the end
-    //    // add visited node position into a MAP
-    // Continue traverse, if not zero Start a new Traversal (if position has been visited skip)
-    // return counter
+    let islandCount = 0;
+
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            if (grid[i][j] === '1') {
+                islandCount++;
+                dfs(grid, i, j);
+            } 
+        }
+    }
+
+    function dfs(graph, r, c) {
+        // Boundary check
+        if (r < 0 || r >= graph.length || c < 0 || c >= graph[0].length) {
+            return;
+        }
+        // Base case
+        if (graph[r][c] === '0') {
+            return;
+        }
+
+        // Mark current position as visited
+        graph[r][c] = '0';
+
+        // recursion right
+        dfs(graph, r, c + 1);
+        // recursion left
+        dfs(graph, r, c - 1);
+        // recursion up
+        dfs(graph, r - 1, c);
+        // recursion down
+        dfs(graph, r + 1, c);
+    }
+
+    return islandCount;
 };
+
+// console.log(numIslands(grid));
+console.log(numIslands(grid2));
