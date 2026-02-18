@@ -32,33 +32,11 @@ const prerequisites3 = [
 // Valid order: 0 → 1 → 2
 
 const canFinish = function (numCourses, prerequisites) {
-    // Courses taken
-    const coursesTaken = new Map();
-    let coursesLeft = numCourses;
+   
 
-    // Walk the prerequisites outer
-    for (let i = 0; i < prerequisites.lenght; i++) {
-        // Walk the prerequisites inner
-        for (let j = 1; j >= 0; j--) {
-            // if course has been taken, skip
-            if (coursesTaken.has(prerequisites[i][j])) {
-                continue;
-            } else {
-                if (
-                    (prerequisites[i][j] === 0 ||
-                        prerequisites[i][j] >
-                            Array.from(myMap.entries()).at(-1)) &&
-                    coursesLeft > 0
-                ) {
-                    // Take course && substract posible courses
-                    coursesTaken.set(prerequisites[i][j], true);
-                    coursesLeft--;
-                }
-            }
-        }
-    }
-
-    return numCourses === coursesTaken.lenght;
+    
 };
 
 console.log(canFinish(numCourses, prerequisites));
+console.log(canFinish(numCourses2, prerequisites2));
+console.log(canFinish(numCourses3, prerequisites3));
