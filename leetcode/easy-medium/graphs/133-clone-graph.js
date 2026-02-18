@@ -26,26 +26,26 @@ class Graph {
     nodes = [];
     size = 0;
 
-    insertNode(val, neighbors) {
-        if(!this.nodes.find((node) => node.val === val)) {
-            // create node
-        } else {
-            //update value
+    insertNode(val, neighborsToBe) {
+        let node = this.nodes.find((n) => n.val === val);
+        if (!node) {
+            node = new Node(val);
+            this.nodes.push(node);
         }
-
-        // create Neighbor nodes if don't exist.
-        neighbors.forEach((neighbor) => {
-            if (!this.nodes.find((node) => node.val === neighbor)) {
-                this.nodes.push(new Node(neighbor));
+        neighborsToBe.forEach((ntb) => {
+            let neighbor = this.nodes.find((n) => n.val === ntb);
+            if (!neighbor) {
+                neighbor = new Node(ntb);
+                this.nodes.push(neighbor);
+            }
+            if (!node.neighbors.includes(neighbor)) {
+                node.neighbors.push(neighbor);
+            }
+            // For undirected graph, add the reverse connection
+            if (!neighbor.neighbors.includes(node)) {
+                neighbor.neighbors.push(node);
             }
         });
-
-        const a = this.nodes.find((n) => n.val === neighbors[0]);
-        const b = this.nodes.find((n) => n.val === neighbors[1]);
-
-        const newNode = new Node(val, [a, b]);
-        this.nodes.push(newNode);
-        this.size++;
     }
 
     printGraph() {
@@ -61,6 +61,29 @@ class Graph {
     }
 }
 
+const cloneGraph = function (node) {
+    const visited = new Map();
+
+    function recurse(node) {
+        if (visited.has(node)) {
+            return visited.get(node);
+        }
+
+        // create cloned Node
+        const clonedNode = new Node(node.val);
+        visited.set(node, clonedNode);
+
+        // Neighbors recurse
+        const a = recurse(node.neighbors[0]);
+        const b = recurse(node.neighbors[1]);
+
+        const neighborsArr = [a, b];
+        clonedNode.neighbors = neighborsArr;
+    }
+    recurse(node);
+    return visited.get(node);
+};
+
 const testGraph = new Graph();
 testGraph.insertNode(1, [2, 4]);
 testGraph.insertNode(2, [1, 3]);
@@ -68,15 +91,5 @@ testGraph.insertNode(3, [2, 4]);
 testGraph.insertNode(4, [1, 3]);
 
 testGraph.printGraph();
-// console.log(testGraph.size);
-
-// const cloneGraph = function (node) {
-//     const clonedGraph = [];
-//     let val = 1
-
-//     while(val)
-
-// };
-
-// const node1 = testGraph.getNode(1);
-// cloneGraph(node1);
+const node1 = testGraph.getNode(1);
+cloneGraph(node1);
