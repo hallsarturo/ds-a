@@ -65,6 +65,8 @@ const cloneGraph = function (node) {
     const visited = new Map();
 
     function recurse(node) {
+        if (!node) return null;
+
         if (visited.has(node)) {
             return visited.get(node);
         }
@@ -74,11 +76,14 @@ const cloneGraph = function (node) {
         visited.set(node, clonedNode);
 
         // Neighbors recurse
-        const a = recurse(node.neighbors[0]);
-        const b = recurse(node.neighbors[1]);
+        clonedNode.neighbors = node.neighbors.map(recurse);
 
-        const neighborsArr = [a, b];
-        clonedNode.neighbors = neighborsArr;
+        // clonedNode.neighbors = [];
+        // for (let neighbor of node.neighbors) {
+        //     clonedNode.neighbors.push(recurse(neighbor));
+        // }
+
+        return visited.get(node);
     }
     recurse(node);
     return visited.get(node);
