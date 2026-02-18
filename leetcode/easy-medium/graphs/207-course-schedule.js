@@ -21,9 +21,44 @@ const prerequisites2 = [
 // Explanation: There are a total of 2 courses to take.
 // To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
 
+const numCourses3 = 3;
+const prerequisites3 = [
+    [1, 0],
+    [2, 1],
+];
+// Output: true
+
+// Explanation:
+// Valid order: 0 → 1 → 2
+
 const canFinish = function (numCourses, prerequisites) {
+    // Courses taken
+    const coursesTaken = new Map();
+    let coursesLeft = numCourses;
 
+    // Walk the prerequisites outer
+    for (let i = 0; i < prerequisites.lenght; i++) {
+        // Walk the prerequisites inner
+        for (let j = 1; j >= 0; j--) {
+            // if course has been taken, skip
+            if (coursesTaken.has(prerequisites[i][j])) {
+                continue;
+            } else {
+                if (
+                    (prerequisites[i][j] === 0 ||
+                        prerequisites[i][j] >
+                            Array.from(myMap.entries()).at(-1)) &&
+                    coursesLeft > 0
+                ) {
+                    // Take course && substract posible courses
+                    coursesTaken.set(prerequisites[i][j], true);
+                    coursesLeft--;
+                }
+            }
+        }
+    }
 
+    return numCourses === coursesTaken.lenght;
 };
 
-console.log(canFinish(numCourses, prerequisites))
+console.log(canFinish(numCourses, prerequisites));
