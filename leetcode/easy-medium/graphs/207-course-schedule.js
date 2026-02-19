@@ -32,9 +32,45 @@ const prerequisites3 = [
 // Valid order: 0 → 1 → 2
 
 const canFinish = function (numCourses, prerequisites) {
-   
+    const graph = Array(numCourses)
+        .fill(0)
+        .map(() => []);
 
-    
+    for (let [course, prereq] of prerequisites) {
+        graph[prereq].push(course);
+    }
+
+    const visited = new Set();
+    const recursionStack = new Set();
+
+    function hasCycle(course) {
+        // If we're currently visiting this course in our path → cycle!
+        if (recursionStack.has(course)) return true;
+
+        // If we already fully explored this course → no cycle here
+        if (visited.has(course)) return false;
+
+        // Mark this course as "currently exploring"
+        recursionStack.add(course);
+
+        // Check all courses that depend on this one
+        for (let nextCourse of graph[course]) {
+            if (hasCycle(nextCourse)) return true;
+        }
+
+        // Done exploring this path, remove from stack
+        recursionStack.delete(course);
+        visited.add(course);
+
+        return false;
+    }
+
+    // Check every course as a starting point
+    for (let i = 0; i < numCourses; i++) {
+        if (hasCycle(i)) return false;
+    }
+
+    return true;
 };
 
 console.log(canFinish(numCourses, prerequisites));
