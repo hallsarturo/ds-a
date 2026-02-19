@@ -23,34 +23,44 @@ const coins3 = [1];
 const amount3 = 0;
 // Output: 0
 
+const coins4 = [1];
+const amount4 = 2;
+// Output: 2
+
+const coins5 = [1, 2147483647];
+const amount5 = 2;
+
 const coinChange = function (coins, amount) {
     // sort coin array
     coins.sort((a, b) => b - a);
 
-    let minChange = 0;
+    let minChange = Infinity;
     let idx = 0;
 
     function recurse(arr, idx) {
         let coin = arr[idx];
 
-        if (coin > amount || amount === 0) {
-            return amount;
+        if (amount === 0) return amount;
+        if (coin > amount && idx++ < arr.length) {
+            return recurse(arr, idx);
         }
 
         // substract the coint to the amount
         amount -= coin;
         minChange++;
 
-        if (amount - coin > 0) return recurse(arr, idx);
-        if (idx++ < arr.length - 1) {
-            idx++;
+        if (amount - coin >= 0) return recurse(arr, idx);
+        if (idx++ < arr.length) {
             return recurse(arr, idx);
         } else {
             return amount;
         }
     }
 
-    recurse(coins, idx);
+    for (let i = 0; i < coins.length; i++) {
+        const iteration = recurse(coins, i) < amount;
+        if (iteration < amount) amount = iteration;
+    }
 
     if (amount === 0) return minChange;
     return -1;
@@ -59,3 +69,5 @@ const coinChange = function (coins, amount) {
 console.log(coinChange(coins, amount));
 console.log(coinChange(coins2, amount2));
 console.log(coinChange(coins3, amount3));
+console.log(coinChange(coins4, amount4));
+console.log(coinChange(coins5, amount5));
