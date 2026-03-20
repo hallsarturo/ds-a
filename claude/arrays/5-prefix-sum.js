@@ -26,3 +26,26 @@ function prefixSum(left, right, array) {
 }
 
 console.log(prefixSum(2, 4, array));
+
+
+// my second answer (months later)
+function prefixSum2(arr, queries) {
+    const prefix = [arr[0]];
+
+    for (let i = 1; i < arr.length; i++) {
+        prefix[i] = prefix[i - 1] + arr[i];
+    }
+    // console.log(prefix);
+    const [l, r] = queries;
+
+    return prefix[r] - (prefix[l - 1] || 0); //set a guard for
+}
+
+const arr = [1, 2, 3, 4, 5];
+const queries = [
+    [1, 3], // sum from index 1 to 3
+    [0, 2], // sum from index 0 to 2
+    [2, 4], // sum from index 2 to 4
+];
+
+console.log(prefixSum2(arr, queries[1]));
