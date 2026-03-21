@@ -33,7 +33,29 @@ const smallUnorderedArray = [7, 2, 9, 4, 1, 8, 3];
 const array = [2, 1, 3];
 console.log(quickSort(largeUnorderedArray));
 
-// 4.5 linear
-// 4.6 linear?
-// 4.7 constant
-// 4.8 cuadratic
+// Improved algorithm (pivot at medium)
+
+function quickSort2(arr) {
+    // base case
+    if (arr.length < 2) {
+        return arr;
+    } else {
+        // recursive case
+        const pivot = arr[Math.floor(arr.length / 2)];
+        const less = [];
+        const greater = [];
+        const equal = [];
+
+        for (let num of arr) {
+            if (num < pivot) {
+                less.push(num);
+            } else if (num > pivot) {
+                greater.push(num);
+            } else {
+                equal.push(num);
+            }
+        }
+
+        return [...quickSort(less), ...equal, ...quickSort(greater)];
+    }
+}
