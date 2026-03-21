@@ -11,29 +11,6 @@ graph['peggy'] = [];
 graph['thom'] = [];
 graph['jonny'] = [];
 
-// const searchQueue = new Deque();
-// searchQueue.addRear(graph['me']);
-// // console.log(searchQueue.size);
-// // console.log(searchQueue.peekFront());
-
-// function personIsSeller(name) {
-//     return name[name.length - 1] === 'j';
-// }
-
-// outerLoop: while (searchQueue.size > 0) {
-//     let person = searchQueue.removeFront();
-//     // console.log(person);
-//     for (let i = 0; i < person.length; i++) {
-//         if (personIsSeller(person[i])) {
-//             console.log(person[i], ' is a mango seller!');
-//             break outerLoop;
-//         } else {
-//             searchQueue.addRear(graph[person[i]]);
-//             console.log(false);
-//         }
-//     }
-// }
-
 function personIsSeller(name) {
     return name[name.length - 1] === 'j';
 }
@@ -62,3 +39,35 @@ function search(name) {
 }
 
 search('me');
+
+/// Other example:
+// Graph represented as adjacency list
+const graph = {
+    A: ['B', 'C'],
+    B: ['D', 'E'],
+    C: ['F'],
+    D: [],
+    E: ['F'],
+    F: [],
+};
+
+function bfsTraversal(graph) {
+    const queue = [];
+    queue.push('A');
+    const searched = new Set();
+
+    while (queue.length > 0) {
+        let item = queue.shift();
+        console.log(item);
+        searched.add(item);
+
+        for (const neighbor of graph[item]) {
+            if (!searched.has(neighbor)) {
+                searched.add(neighbor);
+                queue.push(neighbor);
+            }
+        }
+    }
+}
+
+bfsTraversal(graph);
