@@ -71,3 +71,37 @@ function bfsTraversal(graph) {
 }
 
 bfsTraversal(graph);
+
+/// Search
+
+const graph = {
+    A: ['B', 'C'],
+    B: ['D', 'E'],
+    C: ['F'],
+    D: [],
+    E: ['F'],
+    F: [],
+};
+
+function bfsSearch(graph, start, target) {
+    const queue = [start];
+    const visited = new Set([start]);
+
+    while (queue.length > 0) {
+        const node = queue.shift();
+
+        if (node === target) return true;  // found it
+
+        for (const neighbor of graph[node]) {
+            if (!visited.has(neighbor)) {
+                visited.add(neighbor);
+                queue.push(neighbor);
+            }
+        }
+    }
+
+    return false;  // not found
+}
+
+console.log(bfsSearch(graph, 'A', 'F'));  // true
+console.log(bfsSearch(graph, 'A', 'Z'));  // false
