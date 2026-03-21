@@ -16,7 +16,7 @@ function selectionSort(arr) {
     const newArr = [];
     const copiedArr = arr.slice();
 
-    for (let i = 0; i < copiedArr.length;) {
+    while (copiedArr.length > 0) {
         let smallest = findSmallest(copiedArr);
         newArr.push(copiedArr.splice(smallest, 1)[0]);
     }
