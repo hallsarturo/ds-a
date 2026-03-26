@@ -12,7 +12,7 @@ const string = 'hello';
 const frequencyCount = function (string) {
     const map = {};
 
-    for (let char of string) {
+    for (const char of string) {
         map[char] = (map[char] || 0) + 1;
     }
 
